@@ -57,7 +57,3 @@ docker rmi hello-world
 ```
 
 Stop or terminate the EC2 instance when done to avoid AWS charges.
-
-## License
-
-MIT
