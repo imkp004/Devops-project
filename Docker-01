@@ -1,0 +1,38 @@
+## Launch EC2 + Install Docker
+
+**1. Launch EC2 Instance**
+- AMI: Amazon Linux 2023
+- Instance type: t3.large (or t2.micro for testing)
+- Storage: 30 GB
+- Security Group: Allow SSH (port 22)
+
+**2. Connect via SSH**
+```
+ssh -i your-key.pem ec2-user@<your-ec2-public-ip>
+```
+
+**3. Install Docker**
+```
+sudo dnf update -y
+sudo dnf install docker -y
+sudo systemctl enable --now docker
+sudo usermod -aG docker ec2-user
+```
+Log out and reconnect for permissions to apply.
+
+**4. Test Docker**
+```
+docker version
+docker run hello-world
+docker images
+```
+If you see "Hello from Docker!" — it works.
+
+**5. Cleanup**
+```
+docker rm $(docker ps -aq)
+docker rmi hello-world
+```
+Then stop/terminate the EC2 instance to avoid charges.
+
+---
